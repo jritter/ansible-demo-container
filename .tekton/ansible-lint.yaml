@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: ansible-lint
+spec:
+  workspaces:
+    - name: source
+      description: The source workspace where the ansible code is cloned
+  params:
+  - default: registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:latest
+    description: ansible container image to run this task
+    name: ANSIBLE_IMAGE
+    type: string
+  - default:
+    - ''
+    description: ansible-lint CLI arguments to run
+    name: ARGS
+    type: array
+  steps:
+    - name: ansible-lint
+      image: $(params.ANSIBLE_IMAGE)
+      command: 
+      - ansible-lint
+      args: 
+      - $(params.ARGS)
+      workingDir: $(workspaces.source.path)

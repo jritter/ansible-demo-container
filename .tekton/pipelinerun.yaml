@@ -56,13 +56,16 @@ spec:
           - name: revision
             value: $(params.revision)
       - name: ansible-lint
-        taskRef:
-          name: ansible-lint
-        runAfter:
-          - fetch-repository
-        workspaces:
-          - name: source
-            workspace: source
+        taskSpec:
+          workspaces:
+            - name: source
+              description: The source workspace where the ansible code is cloned
+          steps:
+            - name: ansible-lint
+              image: registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8:latest
+              command:
+              - ansible-lint
+              workingDir: $(workspaces.source.path)
 
   workspaces:
     - name: source
