@@ -12,7 +12,7 @@ authors:
 
 description: your collection description
 license_file: MIT
-tags: ["containers"]
+tags: ["application", "cloud"]
 dependencies: {}
 
 repository: https://github.com/jritter/ansible-demo-container

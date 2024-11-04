@@ -64,7 +64,7 @@ spec:
             - name: ansible-lint
               image: registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:17841aa975ef45f4be635ae850db0d67d35f5bd1290cd71232795d92db33f119
               command:
-              - ansible-lint
+                - ansible-lint
               workingDir: $(workspaces.source.path)
         runAfter:
           - fetch-repository
