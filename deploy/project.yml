@@ -1,0 +1,12 @@
+apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleProject
+metadata:
+  name: ansible-demo-container-main
+  namespace: ansible-demo-container
+spec:
+  branch: main
+  connection_secret: foo
+  name: 'ansible-demo-container [main]'
+  organization: Default
+  repo: 'https://github.com/jritter/ansible-demo-container.git'
+  scm_type: git

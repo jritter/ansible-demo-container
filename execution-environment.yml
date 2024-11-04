@@ -1,0 +1,32 @@
+---
+version: 3
+
+build_arg_defaults:
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--pre'
+
+dependencies:
+  galaxy: requirements.yml
+
+images:
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform/ee-minimal-rhel8@sha256:17841aa975ef45f4be635ae850db0d67d35f5bd1290cd71232795d92db33f119
+
+# Custom package manager path for the RHEL based images
+options:
+  package_manager_path: /usr/bin/microdnf
+
+additional_build_steps:
+  prepend_base:
+    - RUN echo This is a prepend base command!
+    # Enable Non-default stream before packages provided by it can be installed. (optional)
+    # - RUN $PKGMGR module enable postgresql:15 -y
+    # - RUN $PKGMGR install -y postgresql
+  # prepend_galaxy:
+  #  - COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
+
+  prepend_final: |
+    RUN whoami
+    RUN cat /etc/os-release
+  append_final:
+    - RUN echo This is a post-install command!
+    - RUN ls -la /etc

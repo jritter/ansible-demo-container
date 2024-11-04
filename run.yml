@@ -1,0 +1,5 @@
+- name: Hello World
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - run
