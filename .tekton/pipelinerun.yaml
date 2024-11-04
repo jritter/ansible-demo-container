@@ -55,9 +55,9 @@ spec:
             value: $(params.repo_url)
           - name: revision
             value: $(params.revision)
-      - name: pylint
+      - name: ansible-lint
         taskRef:
-          name: pylint
+          name: ansible-lint
         runAfter:
           - fetch-repository
         workspaces:
